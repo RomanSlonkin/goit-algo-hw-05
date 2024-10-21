@@ -13,7 +13,6 @@ def caching_fibonacci():
     return fibonacci
 
 fib = caching_fibonacci() #Test
-print(fib(10)) #Test
+print(fib(1)) #Test
 print(fib(15)) #Test
-print(fib(678)) #Test
 #EOF

@@ -2,6 +2,7 @@ def caching_fibonacci():
     'Function to get fibonnaci number with cache'
     cache = {}
     def fibonacci(n):
+        print(cache)
         'Function to get fibonnaci number from cache'
         if n in {0, 1}:
             return n  
@@ -13,6 +14,6 @@ def caching_fibonacci():
     return fibonacci
 
 fib = caching_fibonacci() #Test
-print(fib(1)) #Test
+print(fib(5)) #Test
 print(fib(15)) #Test
 #EOF

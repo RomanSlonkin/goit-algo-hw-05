@@ -39,12 +39,12 @@ def load_logs(file_path: str) -> list:
         return logs
 
 
-
+@error_handler
 def filter_logs_by_level(logs: list, level: str) -> list:
     """Filters the logs by the specified logging level."""
     return [log for log in logs if log["level"] == level]
 
-
+@error_handler
 def count_logs_by_level(logs: list) -> dict:
     """Counts the number of log entries for each logging level."""
     levels_count = {}
@@ -56,6 +56,7 @@ def count_logs_by_level(logs: list) -> dict:
             levels_count[level] = 1
     return levels_count
 
+@error_handler
 def display_log_counts(counts: dict):
     """Displays the count of log entries for each logging level in a formatted table"""
     print(f"{'Level':<10} | {'Quantity':<15}")

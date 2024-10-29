@@ -2,6 +2,7 @@ import re
 
 
 def error_handler(func):
+    """Decorator to handle errors in the wrapped function."""
     def handler(*args):
         try:
             return func(*args)
@@ -15,6 +16,7 @@ def error_handler(func):
 
 @error_handler
 def parse_log_line(line: str) -> dict:
+    """Parses a single log line into a dictionary."""
     log_pattern = r'(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2}) (\w+) (.*)'
     log = {}
     match = re.match(log_pattern, line)
@@ -26,6 +28,7 @@ def parse_log_line(line: str) -> dict:
     
 @error_handler
 def load_logs(file_path: str) -> list:
+    """Loads logs from a specified file."""
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
         logs = list()
@@ -38,10 +41,12 @@ def load_logs(file_path: str) -> list:
 
 
 def filter_logs_by_level(logs: list, level: str) -> list:
+    """Filters the logs by the specified logging level."""
     return [log for log in logs if log["level"] == level]
 
 
 def count_logs_by_level(logs: list) -> dict:
+    """Counts the number of log entries for each logging level."""
     levels_count = {}
     for log in logs:
         level = log["level"]
@@ -52,9 +57,9 @@ def count_logs_by_level(logs: list) -> dict:
     return levels_count
 
 def display_log_counts(counts: dict):
+    """Displays the count of log entries for each logging level in a formatted table"""
     print(f"{'Level':<10} | {'Quantity':<15}")
     print('-'*27)
     for level, count in counts.items():
         print(f'{level:10} | {count:<15}')
-
-
+#EOF

@@ -15,7 +15,7 @@ def main():
 
     if len(sys.argv) > 2:
         level = sys.argv[2].upper()
-        if any(log['level'] == level for log in logs):  # Перевірка наявності рівня
+        if any(log['level'] == level for log in logs):
             filtered_logs = filter_logs_by_level(logs, level)
             for log in filtered_logs:
                 print(f"{log['date']} {log['time']} {log['level']} {log['message']}")
@@ -26,7 +26,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
+#EOF

@@ -4,7 +4,7 @@
 def input_error(func):
     def handler(*args):
         try:
-            func(*args)
+            return func(*args)
         except (ValueError):
             return'Please give me: name phone_number'
         except KeyError:
@@ -31,16 +31,19 @@ def add_contact(args, contacts):
 @input_error
 def change_contact(args, contacts):
     name, phone = args
-    print(f'Old contact {name} {contacts[name]} ')
-    contacts.update({name: phone})
-    return f'New contact to: {name}: {phone}'
+    if name in contacts:
+        old_phone = contacts[name]
+        contacts[name] = phone
+        return f'Old contact: {name} {old_phone}. Updated to: {phone}'
+    else:
+        return 'There is no such contact, try command: add'
 
 
 @input_error
 def phone_number(args, contacts):
-    name = args
-    if name[0] in contacts.keys():
-        phone = contacts.get(name[0])
+    name = args[0]
+    if name in contacts:
+        phone = contacts.get(name)
         return f'Phone number of {name} is {phone}'
     else:
         raise KeyError
